@@ -15,21 +15,21 @@ def env_step(action):
 def get_reward(result):
     reward = 0
     if result == "strike":
-        reward = -1
-    elif result == "ball":
-        reward = 1
-    elif result == "Foul":
-        reward = -0.5
-    elif result == "out":
         reward = -2
+    elif result == "ball":
+        reward = 0.5
+    elif result == "Foul":
+        reward = 0
+    elif result == "out":
+        reward = -0.5
     elif result == "single":
-        reward = 2
-    elif result == "double":
-        reward = 3
-    elif result == "triple":
         reward = 4
-    elif result == "triple":
+    elif result == "double":
         reward = 5
+    elif result == "triple":
+        reward = 6
+    elif result == "homerun":
+        reward = 7
 
     return reward
 

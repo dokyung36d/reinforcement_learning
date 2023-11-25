@@ -37,7 +37,7 @@ bat_turtle.goto(0, -350)
 
 
 #0~150까지 설정 가능(Int)
-start_time = 80
+start_time = 75
 
 trajectory = "fastball" # or curve
 
@@ -81,9 +81,9 @@ if ball_y == -350 and ball_x == 0:
         # ball_turtle.forward(5000)
 
 flag = 0
-
-for i in range(125):
-    ball_turtle.forward(5)
+ball_turtle.speed(1000)
+for i in range(25):
+    ball_turtle.forward(30)
     current_x, current_y = ball_turtle.xcor(), ball_turtle.ycor()
 
     for j in range(len(defender_locations)):

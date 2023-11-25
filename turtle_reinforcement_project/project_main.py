@@ -134,9 +134,11 @@ else:
 for i_episode in range(num_episodes):
     # 환경과 상태 초기화
     state = Environment()
+    total_reward = 0
     for t in count():
         action = select_action(torch.tensor(state.env(), dtype=torch.float32).unsqueeze(0))
         observation, reward, terminated = get_env(action, state)
+        total_reward += reward
         reward = torch.tensor([reward])
         done = terminated
 
@@ -167,6 +169,8 @@ for i_episode in range(num_episodes):
             print("total_score : ", state.total_score)
             episode_durations.append(t + 1)
             plot_durations()
+            print("total_reward : ", total_reward)
+            total_reward = 0
             break
 
 print('Complete')

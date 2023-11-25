@@ -69,6 +69,7 @@ def simulation(timing, pitcher : Pitcher, env : Environment):
                 plus_angle = i - start_time
                 total_angle = (270 + plus_angle * 6/5) % 360
                 bat_turtle.setheading(total_angle)
+        bat_turtle.speed(100)
         ball_turtle.setheading(270)
     #ball_turtle의 y좌표가 -350일 때
     ball_x, ball_y = ball_turtle.position()
@@ -87,9 +88,10 @@ def simulation(timing, pitcher : Pitcher, env : Environment):
             # ball_turtle.forward(5000)
 
     flag = 0
-
-    for i in range(150):
-        ball_turtle.forward(5)
+    
+    ball_turtle.speed(1000)
+    for i in range(25):
+        ball_turtle.forward(30)
         current_x, current_y = ball_turtle.xcor(), ball_turtle.ycor()
 
         for j in range(len(defender_locations)):
@@ -129,6 +131,9 @@ def simulation(timing, pitcher : Pitcher, env : Environment):
 
     elif 33.75 < total_angle < 45 or 315 < total_angle < 326.25:
         result = "single"
+    # bat_turtle.shape("circle")
+    # bat_turtle.color("white")
+    bat_turtle.shapesize(stretch_wid=0.001, stretch_len=0.001, outline=0.001)
 
     return result
 
