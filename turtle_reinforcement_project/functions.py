@@ -2,7 +2,7 @@ import random
 import torch
 import torch.nn as nn
 from main import simulation
-from reinforcement.env import Environment, Pitcher
+from env import Environment, Pitcher
 
 def env_step(action):
     if action[0][0] == 15:

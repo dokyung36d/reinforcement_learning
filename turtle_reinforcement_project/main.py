@@ -3,8 +3,8 @@ from environment import draw_baseball_diamond, bat
 from ball import fastball, curve, fastball_trajectory, curve_trajectory
 from defender import *
 import math
-from reinforcement.env import *
-from reinforcement.env import  Pitcher
+from env import *
+from env import  Pitcher
 
 #from hit import hit_ball
 

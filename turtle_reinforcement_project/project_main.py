@@ -11,7 +11,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 from setting import Transition, ReplayMemory
-from reinforcement.env import Environment, DQN, Pitcher
+from env import Environment, DQN, Pitcher
 from functions import env_step, get_reward, get_env
 
 is_ipython = 'inline' in matplotlib.get_backend()
