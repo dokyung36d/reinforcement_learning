@@ -50,18 +50,18 @@ def select_action(state):
     else:
         return torch.tensor([[random.randint(0, 15)]], dtype=torch.long)
     
-episode_durations = []
+episode_total_rewards = []
 
 def plot_durations(show_result=False):
     plt.figure(1)
-    durations_t = torch.tensor(episode_durations, dtype=torch.float)
+    durations_t = torch.tensor(episode_total_rewards, dtype=torch.float)
     if show_result:
         plt.title('Result')
     else:
         plt.clf()
         plt.title('Training...')
     plt.xlabel('Episode')
-    plt.ylabel('Duration')
+    plt.ylabel('Total Reward')
     plt.plot(durations_t.numpy())
     # 100개의 에피소드 평균을 가져 와서 도표 그리기
     if len(durations_t) >= 100:
@@ -167,7 +167,7 @@ for i_episode in range(num_episodes):
 
         if done:
             print("total_score : ", state.total_score)
-            episode_durations.append(t + 1)
+            episode_total_rewards.append(total_reward)
             plot_durations()
             print("total_reward : ", total_reward)
             total_reward = 0

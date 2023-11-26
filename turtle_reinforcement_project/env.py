@@ -1,6 +1,7 @@
 import random
 import torch
 import torch.nn as nn
+from pitcher_data import all_pitcher_data
 
 class Environment():
     def __init__(self) -> None:
@@ -73,6 +74,8 @@ class Environment():
 
     def single_plus(self):
         terminate = False
+        self.strike = 0
+        self.ball = 0
         if self.curr_base[2] == 1:
             self.total_score += 1
             self.curr_base[2] = 0
@@ -88,6 +91,8 @@ class Environment():
 
     def double_plus(self):
         terminate = False
+        self.strike = 0
+        self.ball = 0
         if self.curr_base[2] == 1:
             self.total_score += 1
             self.curr_base[2] = 0
@@ -104,6 +109,8 @@ class Environment():
 
     def triple_plus(self):
         terminate = False
+        self.strike = 0
+        self.ball = 0
         if self.curr_base[2] == 1:
             self.total_score += 1
             self.curr_base[2] = 0
@@ -120,6 +127,8 @@ class Environment():
         return terminate
 
     def homerun_plus(self):
+        self.strike = 0
+        self.ball = 0
         terminate = False
         if self.curr_base[2] == 1:
             self.total_score += 1
@@ -163,7 +172,8 @@ class DQN(nn.Module):
 
 class Pitcher():
     def __init__(self) -> None: #추후 투수의 conditional에 맟춰야 함.
-        self.fast_conditional = [0.507, 0.418, 0.361, 0.674, 0.502]
+        self.fast_conditional = all_pitcher_data[random.randint(0, 19)]
+        # self.fast_conditional = [0.507, 0.418, 0.361, 0.674, 0.502]
         #예시 : [50.7, 41.8, 36.1, 67.4, 50.2]
 
     def return_trajectory(self, env : Environment): #여기서 상황에 따라 자세히 구현해야 함.
