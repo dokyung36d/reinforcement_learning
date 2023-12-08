@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import math
 import random
+import numpy as np
 from collections import namedtuple, deque
 from itertools import count
 
@@ -50,7 +51,7 @@ def select_action(state):
     else:
         return torch.tensor([[random.randint(0, 15)]], dtype=torch.long)
     
-episode_total_rewards = []
+episode_total_rewards = [0]
 
 def plot_durations(show_result=False):
     plt.figure(1)
@@ -61,8 +62,8 @@ def plot_durations(show_result=False):
         plt.clf()
         plt.title('Training...')
     plt.xlabel('Episode')
-    plt.ylabel('Total Reward')
-    plt.plot(durations_t.numpy())
+    plt.ylabel('Return')
+    plt.plot(durations_t.numpy()[5:])
     # 100개의 에피소드 평균을 가져 와서 도표 그리기
     if len(durations_t) >= 100:
         means = durations_t.unfold(0, 100, 1).mean(1).view(-1)
@@ -167,8 +168,13 @@ for i_episode in range(num_episodes):
 
         if done:
             print("total_score : ", state.total_score)
-            episode_total_rewards.append(total_reward)
-            plot_durations()
+            # if len(episode_total_rewards) < 5: #EWMA
+            #     episode_total_rewards.append(float(np.mean(episode_total_rewards + [total_reward])))
+            # else: #EWMA
+            #     episode_total_rewards.append(float(np.mean(episode_total_rewards[-4:] + [total_reward])))
+            episode_total_rewards.append(0.99 * episode_total_rewards[-1] + 0.01 * total_reward)
+            if i_episode > 5:
+                plot_durations()
             print("total_reward : ", total_reward)
             total_reward = 0
             break
