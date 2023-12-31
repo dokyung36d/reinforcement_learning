@@ -33,7 +33,7 @@ def get_reward(result):
 
     return reward
 
-def get_env(action, state : Environment):
+def getEnv(action, state : Environment):
 
     timing = env_step(action)
     

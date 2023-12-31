@@ -13,7 +13,7 @@ import torch.nn.functional as F
 
 from setting import Transition, ReplayMemory
 from env import Environment, DQN, Pitcher
-from functions import env_step, get_reward, get_env
+from functions import env_step, get_reward, getEnv
 
 is_ipython = 'inline' in matplotlib.get_backend()
 if is_ipython:
@@ -36,7 +36,7 @@ memory = ReplayMemory(10000)
 
 steps_done = 0
 
-def select_action(state):
+def selectAction(state):
     global steps_done
     sample = random.random()
     eps_threshold = EPS_END + (EPS_START - EPS_END) * \
@@ -137,8 +137,8 @@ for i_episode in range(num_episodes):
     state = Environment()
     total_reward = 0
     for t in count():
-        action = select_action(torch.tensor(state.env(), dtype=torch.float32).unsqueeze(0))
-        observation, reward, terminated = get_env(action, state)
+        action = selectAction(torch.tensor(state.env(), dtype=torch.float32).unsqueeze(0))
+        observation, reward, terminated = getEnv(action, state)
         total_reward += reward
         reward = torch.tensor([reward])
         done = terminated
@@ -153,7 +153,7 @@ for i_episode in range(num_episodes):
 
         # 다음 상태로 이동
         # state = next_state
-        state.set_env(observation)
+        state.setEnv(observation)
 
         # (정책 네트워크에서) 최적화 한단계 수행
         optimize_model()

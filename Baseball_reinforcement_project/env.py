@@ -18,7 +18,7 @@ class Environment():
         observation.extend(self.pitcher.fast_conditional)
         return observation
     
-    def set_env(self, observation):
+    def setEnv(self, observation):
         self.strike = observation[0]
         self.ball = observation[1]
         self.out = observation[2]
