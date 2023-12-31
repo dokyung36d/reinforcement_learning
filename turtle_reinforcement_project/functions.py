@@ -1,7 +1,7 @@
 import random
 import torch
 import torch.nn as nn
-from main import simulation
+from simulation import simulation
 from env import Environment, Pitcher
 
 def env_step(action):

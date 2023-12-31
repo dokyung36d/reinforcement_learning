@@ -37,7 +37,7 @@ bat_turtle.goto(0, -350)
 
 
 #0~150까지 설정 가능(Int)
-start_time = 75
+start_time = 80
 
 trajectory = "fastball" # or curve
 
@@ -128,7 +128,7 @@ print(result)
 
 
 
-# for i in range(len(fast_traj[0])):
-#     if i == 1:
-#         ball_turtle.pendown()
-#     ball_turtle.goto(curve_traj[0][i], curve_traj[1][i])
+for i in range(len(fast_traj[0])):
+    if i == 1:
+        ball_turtle.pendown()
+    ball_turtle.goto(curve_traj[0][i], curve_traj[1][i])
